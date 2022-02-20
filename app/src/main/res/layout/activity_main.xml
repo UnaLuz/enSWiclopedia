@@ -7,16 +7,25 @@
     android:paddingStart="16dp"
     android:paddingTop="16dp"
     android:paddingEnd="16dp"
-    tools:context=".MainActivity">
+    tools:context=".ui.MainActivity">
 
-    <SearchView
+    <androidx.appcompat.widget.SearchView
         android:id="@+id/searchView"
+        style="@style/Theme.EnSWiclopedia.SearchBar"
+        app:iconifiedByDefault="false"
+        app:queryHint="Luke Skywalker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#C6C7C7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

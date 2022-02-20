@@ -9,12 +9,18 @@
     <color name="secondaryDarkColor">#808e95</color>
     <color name="primaryTextColor">#000000</color>
     <color name="secondaryTextColor">#000000</color>
+    <color name="textBackgroundTint">#77FFFFFF</color>
+    <!-- Night theme colors -->
+    <color name="nightPrimaryColor">#121212</color>
+    <color name="nightPrimaryLightColor">#484848</color>
+    <color name="nightPrimaryDarkColor">#000000</color>
+    <color name="nightSecondaryColor">#263238</color>
+    <color name="nightSecondaryLightColor">#4f5b62</color>
+    <color name="nightSecondaryDarkColor">#000a12</color>
+    <color name="nightPrimaryTextColor">#ffffff</color>
+    <color name="nightSecondaryTextColor">#ffffff</color>
+    <color name="nightTextBackgroundTint">#77000000</color>
     <!-- Default colors -->
-    <!--    <color name="purple_200">#FFBB86FC</color>-->
-    <!--    <color name="purple_500">#FF6200EE</color>-->
-    <!--    <color name="purple_700">#FF3700B3</color>-->
-    <!--    <color name="teal_200">#FF03DAC5</color>-->
-    <!--    <color name="teal_700">#FF018786</color>-->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 </resources>

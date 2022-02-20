@@ -1,7 +1,8 @@
-package com.unaluzdev.enswiclopedia
+package com.unaluzdev.enswiclopedia.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.unaluzdev.enswiclopedia.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
