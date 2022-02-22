@@ -1,4 +1,4 @@
-package com.unaluzdev.enswiclopedia.data
+package com.unaluzdev.enswiclopedia.data.model
 
 data class CharacterModel(
     val name: String,
