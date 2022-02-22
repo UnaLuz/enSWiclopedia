@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.unaluzdev.enswiclopedia.R
 import com.unaluzdev.enswiclopedia.data.CharacterModel
 
-class CharacterAdapter(private val characterList: List<CharacterModel>) :
+class CharacterAdapter(val characterList: ArrayList<CharacterModel>) :
     RecyclerView.Adapter<CharacterViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterViewHolder {
