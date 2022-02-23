@@ -1,19 +1,26 @@
 package com.unaluzdev.enswiclopedia.ui
 
 import androidx.lifecycle.ViewModel
-import com.unaluzdev.enswiclopedia.data.CharacterModel
-import com.unaluzdev.enswiclopedia.data.CharacterProvider
+import androidx.lifecycle.viewModelScope
+import com.unaluzdev.enswiclopedia.data.model.CharacterModel
+import com.unaluzdev.enswiclopedia.domain.GetCharactersUseCase
 import com.unaluzdev.enswiclopedia.ui.adapter.CharacterAdapter
+import kotlinx.coroutines.launch
 
 class CharacterViewModel : ViewModel() {
 
     var characterList: ArrayList<CharacterModel> = arrayListOf()
         private set
 
-    fun onLoadCharacters(adapter: CharacterAdapter) {
-        characterList = ArrayList(CharacterProvider.characters())
-        val nNewItems = characterList.size
-        adapter.characterList += characterList
-        adapter.notifyItemRangeInserted(0, nNewItems)
+    var getCharactersUseCase = GetCharactersUseCase()
+
+    fun onCreate(adapter: CharacterAdapter) {
+        viewModelScope.launch {
+            val result = getCharactersUseCase()
+            if (!result.isNullOrEmpty()) {
+                characterList = ArrayList(result)
+                adapter.addCharacters(characterList)
+            }
+        }
     }
 }

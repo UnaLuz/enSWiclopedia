@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initRecyclerView()
-        loadCharacters()
+        characterViewModel.onCreate(binding.recyclerViewCharacter.adapter as CharacterAdapter)
     }
 
     private fun initRecyclerView() {
@@ -27,8 +27,4 @@ class MainActivity : AppCompatActivity() {
             CharacterAdapter(characterViewModel.characterList)
     }
 
-    private fun loadCharacters() {
-        val adapter = binding.recyclerViewCharacter.adapter as CharacterAdapter
-        characterViewModel.onLoadCharacters(adapter)
-    }
 }
