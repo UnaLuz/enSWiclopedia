@@ -4,12 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.unaluzdev.enswiclopedia.R
-import com.unaluzdev.enswiclopedia.data.model.CharacterModel
+import com.unaluzdev.enswiclopedia.domain.model.SWCharacter
 
-class CharacterAdapter(private val characterList: ArrayList<CharacterModel>) :
+class CharacterAdapter(private val characterList: ArrayList<SWCharacter>) :
     RecyclerView.Adapter<CharacterViewHolder>() {
 
-    fun addCharacters(characterList: ArrayList<CharacterModel>) {
+    fun addCharacters(characterList: ArrayList<SWCharacter>) {
         val position = this.characterList.lastIndex
         val nNewItems = characterList.size - this.characterList.size
         this.characterList += characterList - this.characterList
