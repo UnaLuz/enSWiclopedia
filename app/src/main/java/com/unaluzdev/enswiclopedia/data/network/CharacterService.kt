@@ -8,10 +8,10 @@ import kotlinx.coroutines.withContext
 class CharacterService {
     private val retrofit = RetrofitHelper.getRetrofit()
 
-    suspend fun getPeople(): List<CharacterModel> {
+    suspend fun getPeople(): List<CharacterModel>? {
         return withContext(Dispatchers.IO) {
             val response = retrofit.create(CharacterApiClient::class.java).getPeople()
-            response.body()?.people ?: listOf()
+            response.body()?.people
         }
     }
 }
