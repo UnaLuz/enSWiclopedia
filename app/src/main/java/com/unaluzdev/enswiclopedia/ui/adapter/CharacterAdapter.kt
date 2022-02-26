@@ -10,9 +10,9 @@ class CharacterAdapter(private val characterList: ArrayList<CharacterModel>) :
     RecyclerView.Adapter<CharacterViewHolder>() {
 
     fun addCharacters(characterList: ArrayList<CharacterModel>) {
-        val nNewItems = characterList.size
         val position = this.characterList.lastIndex
-        this.characterList += characterList
+        val nNewItems = characterList.size - this.characterList.size
+        this.characterList += characterList - this.characterList
         this.notifyItemRangeInserted(position, nNewItems)
     }
 

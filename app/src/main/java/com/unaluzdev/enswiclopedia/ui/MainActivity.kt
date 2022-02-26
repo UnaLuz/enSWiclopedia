@@ -1,6 +1,7 @@
 package com.unaluzdev.enswiclopedia.ui
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
@@ -18,13 +19,24 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initRecyclerView()
-        characterViewModel.onCreate(binding.recyclerViewCharacter.adapter as CharacterAdapter)
+        characterViewModel.onCreate()
+
+        // Observers
+        characterViewModel.characterList.observe(this) {
+            val adapter = binding.recyclerViewCharacter.adapter as CharacterAdapter
+            adapter.addCharacters(it)
+        }
+        characterViewModel.error.observe(this) { errorMsg ->
+            if (errorMsg.isNotBlank())
+                Toast.makeText(this, errorMsg, Toast.LENGTH_LONG)
+                    .show()
+        }
     }
 
     private fun initRecyclerView() {
         binding.recyclerViewCharacter.layoutManager = GridLayoutManager(this, 2)
         binding.recyclerViewCharacter.adapter =
-            CharacterAdapter(characterViewModel.characterList)
+            CharacterAdapter(ArrayList())
     }
 
 }
