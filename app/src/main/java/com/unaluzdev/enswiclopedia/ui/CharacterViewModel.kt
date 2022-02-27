@@ -3,10 +3,8 @@ package com.unaluzdev.enswiclopedia.ui
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.unaluzdev.enswiclopedia.data.model.CharacterModel
 import com.unaluzdev.enswiclopedia.domain.GetCharactersUseCase
 import com.unaluzdev.enswiclopedia.domain.model.SWCharacter
-import com.unaluzdev.enswiclopedia.domain.model.toDomain
 import com.unaluzdev.enswiclopedia.util.plusAssign
 import kotlinx.coroutines.launch
 
