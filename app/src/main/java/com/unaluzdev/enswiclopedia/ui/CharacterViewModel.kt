@@ -11,9 +11,15 @@ import kotlinx.coroutines.launch
 
 class CharacterViewModel : ViewModel() {
 
-    data class UIState(val loading: Boolean = false, val error: String? = null)
+    data class UIState(
+        val loading: Boolean = false,
+        val error: String? = null
+    )
 
     // Live Data
+    var canLoadMore = MutableLiveData(true)
+        private set
+
     var characterList = MutableLiveData<ArrayList<SWCharacter>>()
         private set
 
@@ -24,12 +30,17 @@ class CharacterViewModel : ViewModel() {
     var getCharactersUseCase = GetCharactersUseCase()
 
     fun onCreate() {
+        onLoadMore()
+    }
+
+    fun onLoadMore() {
         viewModelScope.launch {
             _uiState.value = UIState(loading = true)
             val result = getCharactersUseCase()
-            if (!result.isNullOrEmpty()) {
-                characterList += ArrayList(result)
+            if (result != null) {
+                characterList += ArrayList(result.people)
                 _uiState.value = UIState(loading = false)
+                if (!result.hasNextPage) canLoadMore.postValue(false)
             } else {
                 _uiState.value = UIState(
                     loading = false,
