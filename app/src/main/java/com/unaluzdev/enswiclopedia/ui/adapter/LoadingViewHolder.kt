@@ -8,7 +8,7 @@ class LoadingViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     private val binding = LoadMoreBinding.bind(view)
 
-    fun setOnClickListener(onClick: () -> Unit){
+    fun setOnClickListener(onClick: () -> Unit) {
         binding.seeMoreButton.setOnClickListener {
             onClick()
         }

@@ -1,5 +1,6 @@
 package com.unaluzdev.enswiclopedia.ui.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -8,29 +9,22 @@ import com.unaluzdev.enswiclopedia.domain.model.SWCharacter
 import com.unaluzdev.enswiclopedia.util.VIEW_TYPE_ITEM
 import com.unaluzdev.enswiclopedia.util.VIEW_TYPE_PROGRESS
 
-class CharacterAdapter(private val characterList: ArrayList<SWCharacter?>) :
+class CharacterAdapter(
+    private val characterList: ArrayList<SWCharacter?>,
+    private val loadMoreFunc: () -> Unit
+) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var viewHolder: LoadingViewHolder? = null
 
+    @SuppressLint("NotifyDataSetChanged")
     fun addCharacters(characterList: ArrayList<SWCharacter>) {
-        val position = this.characterList.lastIndex
-        val nNewItems = characterList.size - this.characterList.size
-        this.characterList += characterList - this.characterList
-        this.notifyItemRangeInserted(position, nNewItems)
-    }
-
-    fun addLoadingView(onClick: () -> Unit) {
-        characterList.add(null)
-        notifyItemInserted(characterList.lastIndex)
-        viewHolder?.setOnClickListener(onClick)
-    }
-
-    fun moveLoadView(currentPos: Int, onClick: () -> Unit) {
-        if (currentPos in 0..characterList.lastIndex) {
-            characterList.removeAt(currentPos)
-            notifyItemRemoved(characterList.size)
-            addLoadingView(onClick)
+        val newItems =
+            if (characterList.size > 0) characterList - this.characterList else emptyList()
+        if (newItems.isNotEmpty()) {
+            val position = this.characterList.size
+            this.characterList.addAll(position, newItems)
+            this.notifyDataSetChanged()
         }
     }
 
@@ -59,17 +53,20 @@ class CharacterAdapter(private val characterList: ArrayList<SWCharacter?>) :
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        characterList[position]?.let {
-            if (holder.itemViewType == VIEW_TYPE_ITEM) {
-                (holder as CharacterViewHolder).render(it)
+        if (holder.itemViewType == VIEW_TYPE_ITEM) {
+            (holder as CharacterViewHolder).render(characterList[position]!!)
+        } else {
+            with(holder as LoadingViewHolder) {
+                this.setOnClickListener(loadMoreFunc)
+                viewHolder = this
             }
         }
     }
 
-    override fun getItemCount(): Int = characterList.size
+    override fun getItemCount(): Int = characterList.size + 1
 
     override fun getItemViewType(position: Int): Int {
-        return if (characterList[position] == null) VIEW_TYPE_PROGRESS else VIEW_TYPE_ITEM
+        return if (position == characterList.size) VIEW_TYPE_PROGRESS else VIEW_TYPE_ITEM
     }
 
 }

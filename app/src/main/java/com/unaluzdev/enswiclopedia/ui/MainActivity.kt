@@ -26,7 +26,6 @@ class MainActivity : AppCompatActivity() {
         characterViewModel.characterList.observe(this) {
             val adapter = binding.recyclerViewCharacter.adapter as CharacterAdapter
             adapter.addCharacters(it)
-            adapter.moveLoadView(adapter.itemCount - 1) { loadMore() }
         }
 
         characterViewModel.uiState.observe(this) { state ->
@@ -46,12 +45,11 @@ class MainActivity : AppCompatActivity() {
         with(binding.recyclerViewCharacter) {
             // Create layout manager and adapter
             val layoutManager = GridLayoutManager(this@MainActivity, 2)
-            val adapter = CharacterAdapter(ArrayList())
+            val adapter = CharacterAdapter(ArrayList()) { loadMore() }
             // Initialize them in the recycler view
             this.layoutManager = layoutManager
             this.adapter = adapter
             addCustomSpanSizeLookup(layoutManager, adapter)
-            adapter.addLoadingView { loadMore() }
         }
     }
 
@@ -72,7 +70,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadMore() {
-        Toast.makeText(this@MainActivity, "Loading more", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this@MainActivity, "Loading", Toast.LENGTH_SHORT).show()
+        characterViewModel.onLoadMore()
     }
 
 }
