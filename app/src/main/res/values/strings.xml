@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">enSWiclopedia</string>
     <string name="see_more">See More</string>
+    <string name="query_hint">Search character</string>
 </resources>
