@@ -28,6 +28,10 @@ class CharacterAdapter(
         }
     }
 
+    fun removeLoadMoreView() {
+        viewHolder?.remove()
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         if (viewType == VIEW_TYPE_PROGRESS) {
             val layoutInflater = LayoutInflater.from(parent.context)

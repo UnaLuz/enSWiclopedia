@@ -23,6 +23,13 @@ class MainActivity : AppCompatActivity() {
         initRecyclerView()
 
         // Observers
+        characterViewModel.canLoadMore.observe(this) { canLoadMore ->
+            if (!canLoadMore) {
+                val adapter = binding.recyclerViewCharacter.adapter as CharacterAdapter
+                adapter.removeLoadMoreView()
+            }
+        }
+
         characterViewModel.characterList.observe(this) {
             val adapter = binding.recyclerViewCharacter.adapter as CharacterAdapter
             adapter.addCharacters(it)
