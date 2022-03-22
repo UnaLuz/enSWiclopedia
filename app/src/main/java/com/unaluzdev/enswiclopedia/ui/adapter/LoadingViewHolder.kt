@@ -19,4 +19,10 @@ class LoadingViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         binding.seeMoreButton.isClickable = false
         binding.seeMoreButton.visibility = View.GONE
     }
+
+    fun add(onClick: () -> Unit) {
+        binding.seeMoreButton.visibility = View.VISIBLE
+        binding.seeMoreButton.isClickable = true
+        setOnClickListener(onClick)
+    }
 }
