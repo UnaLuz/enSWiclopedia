@@ -32,6 +32,10 @@ class CharacterAdapter(
         viewHolder?.remove()
     }
 
+    fun addLoadMoreView() {
+        viewHolder?.add(loadMoreFunc)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         if (viewType == VIEW_TYPE_PROGRESS) {
             val layoutInflater = LayoutInflater.from(parent.context)
@@ -71,6 +75,13 @@ class CharacterAdapter(
 
     override fun getItemViewType(position: Int): Int {
         return if (position == characterList.size) VIEW_TYPE_PROGRESS else VIEW_TYPE_ITEM
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun show(characterList: ArrayList<SWCharacter>) {
+        this.characterList.clear()
+        this.characterList.addAll(characterList)
+        this.notifyDataSetChanged()
     }
 
 }
