@@ -9,6 +9,7 @@ import com.unaluzdev.enswiclopedia.databinding.ActivityMainBinding
 import com.unaluzdev.enswiclopedia.ui.adapter.CharacterAdapter
 import com.unaluzdev.enswiclopedia.util.VIEW_TYPE_ITEM
 import com.unaluzdev.enswiclopedia.util.VIEW_TYPE_PROGRESS
+import androidx.appcompat.widget.SearchView as CompatSearchView
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,15 +25,25 @@ class MainActivity : AppCompatActivity() {
 
         // Observers
         characterViewModel.canLoadMore.observe(this) { canLoadMore ->
+            val adapter = binding.recyclerViewCharacter.adapter as CharacterAdapter
             if (!canLoadMore) {
-                val adapter = binding.recyclerViewCharacter.adapter as CharacterAdapter
                 adapter.removeLoadMoreView()
+            } else {
+                adapter.addLoadMoreView()
             }
         }
 
         characterViewModel.characterList.observe(this) {
             val adapter = binding.recyclerViewCharacter.adapter as CharacterAdapter
             adapter.addCharacters(it)
+        }
+
+        characterViewModel.searchResult.observe(this) { searchResult ->
+            val adapter = binding.recyclerViewCharacter.adapter as CharacterAdapter
+            if (searchResult.isNullOrEmpty())
+                adapter.show(characterViewModel.characterList.value ?: ArrayList())
+            else
+                adapter.show(searchResult)
         }
 
         characterViewModel.uiState.observe(this) { state ->
@@ -46,6 +57,21 @@ class MainActivity : AppCompatActivity() {
 
         // Finish onCreate
         characterViewModel.onCreate()
+
+        binding.searchView.setOnQueryTextListener(object : CompatSearchView.OnQueryTextListener {
+            override fun onQueryTextChange(query: String?): Boolean {
+                if (query.isNullOrBlank()) {
+                    characterViewModel.onCleanSearch()
+                }
+                return false
+            }
+
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (!query.isNullOrBlank())
+                    characterViewModel.onSearchRequest(query)
+                return false
+            }
+        })
     }
 
     private fun initRecyclerView() {
@@ -77,8 +103,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadMore() {
-        Toast.makeText(this@MainActivity, "Loading", Toast.LENGTH_SHORT).show()
-        characterViewModel.onLoadMore()
+        if (characterViewModel.searchResult.value.isNullOrEmpty())
+            characterViewModel.onLoadMore()
     }
 
 }
