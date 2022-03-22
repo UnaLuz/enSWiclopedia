@@ -20,4 +20,8 @@ class CharacterRepository {
         }
         return response
     }
+
+    suspend fun getCharacterSearchResults(query: String): SWPeopleResponse? {
+        return api.getPeopleQueryResult(query = query)?.toDomain()
+    }
 }
