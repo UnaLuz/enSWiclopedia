@@ -1,7 +1,7 @@
 package com.unaluzdev.enswiclopedia.domain.model
 
 import com.unaluzdev.enswiclopedia.data.model.CharacterModel
-import com.unaluzdev.enswiclopedia.util.getCharacterImageUrl
+import com.unaluzdev.enswiclopedia.util.getImageUrl
 
 data class SWCharacter(
     val imgUrl: String,
@@ -21,7 +21,7 @@ data class SWCharacter(
 )
 
 fun CharacterModel.toDomain() = SWCharacter(
-    imgUrl = getCharacterImageUrl(this.url),
+    imgUrl = getImageUrl(this.url),
     name,
     birth_year,
     eye_color,
