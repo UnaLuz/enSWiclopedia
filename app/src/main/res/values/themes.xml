@@ -16,11 +16,13 @@
         <item name="android:textColor">@color/primaryTextColor</item>
         <item name="android:fontFamily">@font/jura</item>
         <item name="android:textSize">18sp</item>
+        <item name="colorAccent">@color/yellow</item>
     </style>
     <!-- Search Bar style -->
     <style name="Theme.EnSWiclopedia.SearchBar" parent="Theme.EnSWiclopedia">
         <item name="android:background">@drawable/bg_rounded</item>
     </style>
+
     <style name="Theme.EnSWiclopedia.CardView.TextView" parent="Theme.EnSWiclopedia">
         <item name="android:background">?attr/colorPrimary</item>
         <item name="android:fontFamily">@font/starkiller_font</item>
@@ -31,6 +33,7 @@
         <item name="android:textColor">?attr/colorOnPrimary</item>
         <item name="android:textStyle">bold</item>
     </style>
+
     <style name="Theme.EnSWiclopedia.CardView.TextView.Tint" parent="Theme.EnSWiclopedia.CardView.TextView">
         <item name="backgroundTint">@color/textBackgroundTint</item>
         <item name="android:backgroundTintMode">multiply</item>
