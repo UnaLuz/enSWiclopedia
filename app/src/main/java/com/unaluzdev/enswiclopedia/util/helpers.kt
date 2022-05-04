@@ -1,8 +1,9 @@
 package com.unaluzdev.enswiclopedia.util
 
-fun getId(url: String): String? {
-    val pattern = """${BASE_INFO_URL}people/(\d+)/""".toRegex()
+fun getId(url: String, category: String = "people"): String? {
+    val pattern = """${BASE_INFO_URL}$category/(\d+)/""".toRegex()
     return pattern.find(url)?.groupValues?.get(1)
 }
 
-fun getCharacterImageUrl(url: String): String = BASE_IMAGE_URL + "characters/${getId(url)}.jpg"
+fun getImageUrl(url: String, category: String = "characters"): String =
+    BASE_IMAGE_URL + "$category/${getId(url)}.jpg"
