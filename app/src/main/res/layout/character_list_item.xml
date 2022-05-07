@@ -2,7 +2,8 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="160dp"
+    android:id="@+id/character_item"
+    android:layout_width="match_parent"
     android:layout_height="192dp"
     android:layout_margin="8dp"
     android:backgroundTint="?attr/colorSecondary"
@@ -26,9 +27,9 @@
 
         <TextView
             android:id="@+id/textViewCharacterName"
+            style="@style/Theme.EnSWiclopedia.CardView.TextView.Tint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/Theme.EnSWiclopedia.CardView.TextView.Tint"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -23,10 +23,15 @@
         <item name="android:background">@drawable/bg_rounded</item>
     </style>
 
-    <style name="Theme.EnSWiclopedia.CardView.TextView" parent="Theme.EnSWiclopedia">
-        <item name="android:background">?attr/colorPrimary</item>
-        <item name="android:fontFamily">@font/starkiller_font</item>
+    <style name="Theme.EnSWiclopedia.TextView.Label" parent="Theme.EnSWiclopedia">
+        <item name="fontFamily">@font/starkiller</item>
+    </style>
+    <style name="Theme.EnSWiclopedia.TextView.Label.Small" parent="Theme.EnSWiclopedia.TextView.Label">
         <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Theme.EnSWiclopedia.CardView.TextView" parent="Theme.EnSWiclopedia.TextView.Label.Small">
+        <item name="android:background">?attr/colorPrimary</item>
         <item name="android:gravity">center</item>
         <item name="android:paddingStart">16dp</item>
         <item name="android:paddingEnd">16dp</item>

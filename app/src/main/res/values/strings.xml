@@ -1,5 +1,16 @@
 <resources>
     <string name="app_name">enSWiclopedia</string>
+    <string name="no_character_found">No character found</string>
     <string name="see_more">See More</string>
     <string name="query_hint">Search character</string>
+    <string name="species_label">Species</string>
+    <string name="birth_year_label">Birth year</string>
+    <string name="height_label">Height</string>
+    <string name="films_label">Films</string>
+    <string name="fragment_character_details_label">{name}</string>
+    <string name="hair_color_label">Hair color</string>
+    <string name="gender_label">Gender</string>
+    <string name="eye_color_label">Eye color</string>
+    <string name="mass_label">Mass</string>
+    <string name="homeworld_label">Homeworld</string>
 </resources>
