@@ -1,9 +1,11 @@
 package com.unaluzdev.enswiclopedia.domain.model
 
 import com.unaluzdev.enswiclopedia.data.model.CharacterModel
+import com.unaluzdev.enswiclopedia.util.getId
 import com.unaluzdev.enswiclopedia.util.getImageUrl
 
 data class SWCharacter(
+    val id: Int,
     val imgUrl: String,
     val name: String,
     val birth_year: String,
@@ -21,6 +23,7 @@ data class SWCharacter(
 )
 
 fun CharacterModel.toDomain() = SWCharacter(
+    id = getId(url)?.toInt() ?: 0,
     imgUrl = getImageUrl(this.url),
     name,
     birth_year,
