@@ -4,10 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph.xml"
     app:startDestination="@id/characterListFragment">
-
     <fragment
         android:id="@+id/characterListFragment"
         android:name="com.unaluzdev.enswiclopedia.ui.fragment.CharacterListFragment"
-        android:label="fragment_character_list"
-        tools:layout="@layout/fragment_character_list" />
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_character_list" >
+        <action
+            android:id="@+id/action_characterListFragment_to_characterDetailsFragment"
+            app:destination="@id/fragment_character_details" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_character_details"
+        android:name="com.unaluzdev.enswiclopedia.ui.fragment.CharacterDetailsFragment"
+        android:label="@string/fragment_character_details_label"
+        tools:layout="@layout/fragment_character_details">
+        <argument
+            android:name="id"
+            app:argType="integer" />
+        <argument
+            android:name="name"
+            app:argType="string" />
+    </fragment>
 </navigation>
