@@ -1,6 +1,7 @@
 package com.unaluzdev.enswiclopedia.domain.model
 
 import com.unaluzdev.enswiclopedia.data.model.CharacterModel
+import com.unaluzdev.enswiclopedia.util.Category
 import com.unaluzdev.enswiclopedia.util.getId
 import com.unaluzdev.enswiclopedia.util.getImageUrl
 
@@ -33,7 +34,7 @@ fun CharacterModel.toDomain() = SWCharacter(
     height,
     mass,
     skin_color,
-    homeworld,
+    homeworld = getId(homeworld, Category.PLANETS) ?: "",
     films,
     species,
     starships,
