@@ -13,4 +13,5 @@
     <string name="eye_color_label">Eye color</string>
     <string name="mass_label">Mass</string>
     <string name="homeworld_label">Homeworld</string>
+    <string name="loading">Loading...</string>
 </resources>
