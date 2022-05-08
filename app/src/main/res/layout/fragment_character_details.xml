@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".ui.fragment.CharacterDetailsFragment">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/image_containing_card_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorSecondary"
+            android:importantForAccessibility="no"
+            app:cardCornerRadius="256dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="?attr/colorSecondary"
+            app:strokeWidth="4dp">
+
+            <ImageView
+                android:id="@+id/character_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="256dp"
+                android:scaleType="fitCenter"
+                tools:ignore="ContentDescription,ImageContrastCheck"
+                tools:src="@tools:sample/avatars" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <GridLayout
+            android:id="@+id/static_info_linear_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:columnCount="4"
+            android:orientation="horizontal"
+            android:useDefaultMargins="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image_containing_card_view">
+
+            <TextView
+                android:id="@+id/birth_date_label"
+                style="@style/Theme.EnSWiclopedia.TextView.Label.Small"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:text="@string/birth_year_label" />
+
+            <TextView
+                android:id="@+id/birth_date_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                tools:text="@tools:sample/date/ddmmyy" />
+
+
+            <TextView
+                android:id="@+id/hair_color_label"
+                style="@style/Theme.EnSWiclopedia.TextView.Label.Small"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:text="@string/hair_color_label" />
+
+            <TextView
+                android:id="@+id/hair_color_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                tools:text="brown" />
+
+            <TextView
+                android:id="@+id/gender_label"
+                style="@style/Theme.EnSWiclopedia.TextView.Label.Small"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:text="@string/gender_label" />
+
+            <TextView
+                android:id="@+id/gender_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                tools:text="unknown" />
+
+            <TextView
+                android:id="@+id/eye_color_label"
+                style="@style/Theme.EnSWiclopedia.TextView.Label.Small"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:text="@string/eye_color_label" />
+
+
+            <TextView
+                android:id="@+id/eye_color_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                tools:text="brown" />
+
+            <TextView
+                android:id="@+id/height_label"
+                style="@style/Theme.EnSWiclopedia.TextView.Label.Small"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:text="@string/height_label" />
+
+            <TextView
+                android:id="@+id/height_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                tools:text="182" />
+
+            <TextView
+                android:id="@+id/mass_label"
+                style="@style/Theme.EnSWiclopedia.TextView.Label.Small"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:text="@string/mass_label" />
+
+            <TextView
+                android:id="@+id/mass_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                tools:text="182" />
+        </GridLayout>
+
+        <TextView
+            android:id="@+id/homeworld_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/starkiller"
+            android:text="@string/homeworld_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/static_info_linear_layout" />
+
+        <TextView
+            android:id="@+id/homeworld_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/homeworld_label"
+            tools:text="@tools:sample/cities" />
+
+        <TextView
+            android:id="@+id/species_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/starkiller"
+            android:text="@string/species_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/homeworld_info" />
+
+        <TextView
+            android:id="@+id/species_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/species_label"
+            tools:text="@tools:sample/full_names"/>
+
+        <TextView
+            android:id="@+id/films_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/starkiller"
+            android:text="@string/films_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/species_info" />
+
+        <TextView
+            android:id="@+id/films_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/films_label"
+            tools:text="@tools:sample/full_names" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
