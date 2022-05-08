@@ -16,6 +16,7 @@ class CharacterAdapter(
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var viewHolder: LoadingViewHolder? = null
+    private var hasLoadMoreView = false
 
     @SuppressLint("NotifyDataSetChanged")
     fun addCharacters(characterList: ArrayList<SWCharacter>) {
@@ -30,14 +31,16 @@ class CharacterAdapter(
 
     fun removeLoadMoreView() {
         viewHolder?.remove()
+        hasLoadMoreView = false
     }
 
     fun addLoadMoreView() {
+        hasLoadMoreView = true
         viewHolder?.add(loadMoreFunc)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        if (viewType == VIEW_TYPE_PROGRESS) {
+        if (hasLoadMoreView && viewType == VIEW_TYPE_PROGRESS) {
             val layoutInflater = LayoutInflater.from(parent.context)
             val holder = LoadingViewHolder(
                 layoutInflater.inflate(
@@ -62,8 +65,12 @@ class CharacterAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder.itemViewType == VIEW_TYPE_ITEM) {
-            (holder as CharacterViewHolder).render(characterList[position]!!)
-        } else {
+            with(holder as CharacterViewHolder) {
+                val character = characterList[position]!!
+                render(character)
+                setOnClickAction(character)
+            }
+        } else if(hasLoadMoreView) {
             with(holder as LoadingViewHolder) {
                 this.setOnClickListener(loadMoreFunc)
                 viewHolder = this
@@ -71,7 +78,7 @@ class CharacterAdapter(
         }
     }
 
-    override fun getItemCount(): Int = characterList.size + 1
+    override fun getItemCount(): Int = characterList.size + if(hasLoadMoreView) 1 else 0
 
     override fun getItemViewType(position: Int): Int {
         return if (position == characterList.size) VIEW_TYPE_PROGRESS else VIEW_TYPE_ITEM
