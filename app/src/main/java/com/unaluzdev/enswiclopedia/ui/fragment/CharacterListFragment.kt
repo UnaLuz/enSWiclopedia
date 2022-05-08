@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.unaluzdev.enswiclopedia.databinding.FragmentCharacterListBinding
 import com.unaluzdev.enswiclopedia.ui.CharacterViewModel
@@ -24,7 +24,7 @@ import androidx.appcompat.widget.SearchView as CompatSearchView
 class CharacterListFragment : Fragment() {
     private var _binding: FragmentCharacterListBinding? = null
     private val binding get() = _binding!!
-    private val characterViewModel: CharacterViewModel by viewModels()
+    private val characterViewModel: CharacterViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,15 +61,31 @@ class CharacterListFragment : Fragment() {
 
         characterViewModel.searchResult.observe(viewLifecycleOwner) { searchResult ->
             val adapter = binding.recyclerViewCharacter.adapter as CharacterAdapter
-            if (searchResult.isNullOrEmpty())
-                adapter.show(characterViewModel.characterList.value ?: ArrayList())
-            else
-                adapter.show(searchResult)
+            when {
+                searchResult == null -> {
+                    adapter.show(characterViewModel.characterList.value ?: ArrayList())
+                    binding.noCharacterFound.visibility = View.GONE
+                }
+                searchResult.isEmpty() -> {
+                    adapter.show(searchResult)
+                    binding.noCharacterFound.visibility = View.VISIBLE
+                }
+                else -> {
+                    binding.noCharacterFound.visibility = View.GONE
+                    adapter.show(searchResult)
+                }
+            }
         }
 
         characterViewModel.uiState.observe(viewLifecycleOwner) { state ->
-            if (state.loading) binding.progressIndicator.show()
-            else binding.progressIndicator.hide()
+            val adapter = binding.recyclerViewCharacter.adapter as CharacterAdapter
+            if (state.loading) {
+                adapter.removeLoadMoreView()
+                binding.progressIndicator.show()
+            } else {
+                binding.progressIndicator.hide()
+                adapter.addLoadMoreView()
+            }
 
             if (!state.error.isNullOrBlank())
                 Toast.makeText(requireContext(), state.error, Toast.LENGTH_LONG)
@@ -130,6 +146,7 @@ class CharacterListFragment : Fragment() {
 
     companion object {
         const val TAG = "CharacterListFragment"
+
         /**
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
