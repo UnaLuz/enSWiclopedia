@@ -34,7 +34,10 @@ class CharacterViewModel : ViewModel() {
     var getCharacterSearchResultsUseCase = GetCharacterSearchResultsUseCase()
 
     fun onCreate() {
-        onLoadMore()
+        if (characterList.value.isNullOrEmpty())
+            onLoadMore()
+        if(!searchResult.value.isNullOrEmpty())
+            canLoadMore.postValue(false)
     }
 
     fun onLoadMore() {
@@ -74,5 +77,10 @@ class CharacterViewModel : ViewModel() {
     fun onCleanSearch() {
         searchResult.value = null
         canLoadMore.postValue(true)
+    }
+
+    fun getCharacter(condition: (SWCharacter) -> Boolean): SWCharacter? {
+        return characterList.value?.find(condition)
+            ?: searchResult.value?.find(condition)
     }
 }
