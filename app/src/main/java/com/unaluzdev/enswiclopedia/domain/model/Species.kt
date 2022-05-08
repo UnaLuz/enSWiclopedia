@@ -6,8 +6,8 @@ import com.unaluzdev.enswiclopedia.util.getId
 import com.unaluzdev.enswiclopedia.util.getImageUrl
 
 data class Species(
-    val averageHeight: String,
-    val averageLifespan: String,
+    val average_height: String,
+    val average_lifespan: String,
     val classification: String,
     val designation: String,
     val films: List<String>,
@@ -19,8 +19,8 @@ data class Species(
 )
 
 fun SpeciesModel.toDomain() = Species(
-    averageHeight = averageHeight,
-    averageLifespan = averageLifespan,
+    average_height = average_height,
+    average_lifespan = average_lifespan,
     classification = classification,
     designation = designation,
     films = films,
