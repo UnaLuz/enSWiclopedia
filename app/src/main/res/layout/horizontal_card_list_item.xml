@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="72dp"
+    app:cardCornerRadius="72dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:padding="4dp">
+
+        <ImageView
+            android:id="@+id/horizontal_card_image_view"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:importantForAccessibility="no"
+            android:scaleType="fitXY"
+            tools:ignore="ImageContrastCheck"
+            tools:src="@drawable/ic_image" />
+
+        <TextView
+            android:id="@+id/horizontal_card_text_view"
+            style="@style/Theme.EnSWiclopedia.TextView.Label.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            tools:text="@tools:sample/cities" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

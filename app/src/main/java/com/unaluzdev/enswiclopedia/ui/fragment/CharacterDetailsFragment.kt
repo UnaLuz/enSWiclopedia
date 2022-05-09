@@ -1,5 +1,6 @@
 package com.unaluzdev.enswiclopedia.ui.fragment
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestBuilder
 import com.unaluzdev.enswiclopedia.R
 import com.unaluzdev.enswiclopedia.databinding.FragmentCharacterDetailsBinding
 import com.unaluzdev.enswiclopedia.domain.model.SWCharacter
@@ -51,9 +53,13 @@ class CharacterDetailsFragment : Fragment() {
         // Observers
         characterDetailsViewModel.homeworldState.observe(viewLifecycleOwner) { state ->
             if (state.loading) {
-                binding.homeworldInfo.text = getString(R.string.loading)
+                binding.homeworldInfo.horizontalCardTextView.text = getString(R.string.loading)
             } else if (state.planet != null) {
-                binding.homeworldInfo.text = state.planet.name
+                binding.homeworldInfo.horizontalCardTextView.text = state.planet.name
+                renderImageWith(
+                    binding.homeworldInfo.horizontalCardImageView,
+                    state.planet.imgUrl
+                ) { circleCrop() }
             }
             state.error?.let { message ->
                 Toast.makeText(
@@ -96,9 +102,19 @@ class CharacterDetailsFragment : Fragment() {
         characterDetailsViewModel.onLoadHomeworld(this.homeworld)
     }
 
-    private fun renderImageWith(imageView: ImageView, url: String) {
+    private fun renderImageWith(
+        imageView: ImageView,
+        url: String,
+        options: (RequestBuilder<Drawable>.() -> RequestBuilder<Drawable>)? = null
+    ) {
         Glide.with(requireContext())
             .load(url)
+            .error(R.drawable.ic_image)
+            .also {
+                if (options != null) {
+                    it.options()
+                }
+            }
             .into(imageView)
     }
 
