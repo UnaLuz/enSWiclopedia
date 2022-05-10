@@ -6,5 +6,5 @@ import com.unaluzdev.enswiclopedia.domain.model.Planet
 class GetPlanetUseCase {
     private val repository = PlanetRepository()
 
-        suspend operator fun invoke(id: String): Planet? = repository.getPlanet(id)
+    suspend operator fun invoke(id: String): Planet? = repository.getPlanet(id)
 }
