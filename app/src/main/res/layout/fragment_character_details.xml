@@ -172,16 +172,38 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/homeworld_info" />
 
-        <TextView
-            android:id="@+id/species_info"
-            android:layout_width="0dp"
+        <FrameLayout
+            android:id="@+id/species_section"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_weight="2"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/species_label"
-            tools:text="@tools:sample/full_names" />
+            app:layout_constraintTop_toBottomOf="@id/species_label">
+
+            <include
+                android:id="@+id/species_placeholder"
+                layout="@layout/horizontal_card_list_item"
+                android:layout_width="wrap_content"
+                android:layout_height="72dp"
+                android:layout_marginTop="8dp"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/species_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_weight="2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/species_label"
+                tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                tools:listitem="@layout/horizontal_card_list_item"
+                tools:orientation="horizontal"
+                tools:spanCount="1">
+
+            </androidx.recyclerview.widget.RecyclerView>
+        </FrameLayout>
 
         <TextView
             android:id="@+id/films_label"
@@ -193,7 +215,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/species_info" />
+            app:layout_constraintTop_toBottomOf="@id/species_section" />
 
         <TextView
             android:id="@+id/films_info"
