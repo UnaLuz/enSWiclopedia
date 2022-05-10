@@ -11,7 +11,7 @@ data class Species(
     val classification: String,
     val designation: String,
     val films: List<String>,
-    val homeworld: String,
+    val homeworld: String?,
     val language: String,
     val name: String,
     val id: Int,
