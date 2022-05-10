@@ -2,6 +2,7 @@ package com.unaluzdev.enswiclopedia.data.network
 
 import com.unaluzdev.enswiclopedia.data.model.PeopleResponse
 import com.unaluzdev.enswiclopedia.data.model.PlanetModel
+import com.unaluzdev.enswiclopedia.data.model.SpeciesModel
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -20,4 +21,11 @@ interface PlanetApiClient {
     suspend fun getPlanet(
         @Path("id") id: String
     ): Response<PlanetModel>
+}
+
+interface SpeciesApiClient {
+    @GET("species/{id}/")
+    suspend fun getSpecies(
+        @Path("id") id: String
+    ): Response<SpeciesModel>
 }
