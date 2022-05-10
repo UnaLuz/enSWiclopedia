@@ -35,8 +35,8 @@ fun CharacterModel.toDomain() = SWCharacter(
     mass,
     skin_color,
     homeworld = getId(homeworld, Category.PLANETS) ?: "",
-    films,
-    species,
+    films = films.map { getId(it, Category.FILMS) ?: "" },
+    species = species.map { getId(it, Category.SPECIES) ?: "" },
     starships,
     vehicles
 )
